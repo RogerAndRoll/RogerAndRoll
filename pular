@@ -1,0 +1,98 @@
+//quando pular com seta pra cima       
+	public void pular()
+	{
+
+		if((up==1 || playerSubindo !=0))  
+		{ 
+			up = 0;    playerDescendo2=1;
+
+ if(playerSubindo2 ==0){ if((getY() - alturadoPulo) > 16) {playerSubindo = getY() - alturadoPulo;} else {playerSubindo = 16;}playerSubindo2 =1;}
+
+
+			//Para o player não ultrapassar o limite de onde o inimigo fica
+
+			if ((World.isFree(getX(), playerSubindo)|| emCimaCaixa == true))
+
+			{ 
+				if(getY() >= playerSubindo && !((getY() -16) < 16) && !(isColliding(this, Game.casa,0,0,0,0,0, 0,0,0,0,0))) 
+				{
+  
+				setY(getY() -16);
+
+				}	
+
+				
+				else{playerSubindo =0; playerSubindo2=0;}  
+
+				
+				Player.escudoAtivo = 0;
+
+				if (estouNaEscada==0) {playerDescendo = getY();}
+
+			} 
+
+			else 
+			{ 
+
+				if(emCimaCaixa ==false)
+
+				{ 
+
+					up = 0;	
+
+
+					if(getY() > playerSubindo && !((getY() -16) < 16)) 
+					{
+						setY(getY() -16);
+					}
+
+					else
+					{
+						playerSubindo =0; 
+
+						playerSubindo2=0;
+					} 
+
+					Player.escudoAtivo = 0; 
+
+					playerDescendo = getY();  
+
+					emCimaCaixa=true; 
+
+				}
+			}
+		} 
+		// if up false (0)
+
+		else {
+
+			if(World.isFree(this.getX(),this.getY()+8) 
+					&& (Game.jogador.getY() < Game.HEIGHT-48)
+					
+
+					) 
+
+			{ 
+				playerDescendo += 8;  
+
+				setY(playerDescendo);
+
+
+				if(getY() < Game.HEIGHT-48)
+
+				{setY(playerDescendo);}
+
+				else { setY(Game.HEIGHT-48); 
+
+				emCimaCaixa = false; 
+
+				up = 0; 
+
+				playerDescendo=0; 
+
+				playerDescendo2=0;}} 
+
+			else if(emCimaCaixa = true) {playerDescendo2=0;}
+
+		}
+	} //Fim do pular()
